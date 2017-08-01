@@ -1,0 +1,147 @@
+#current-weather-info {
+    width: 960px;
+    height: 430px;
+}
+.img-container {
+    width: 160px;
+    position: relative;
+    right: 45px;
+    bottom: 30px;
+}
+.current-weather-info {
+    font-size: 25px;
+}
+#feedback {
+    max-height: 200px;
+}
+.contactContent, h4{
+    color: #d13f31;
+    font-family: 'Oswald';
+}
+#submitMessage {
+    color: tomato;
+}
+.profilePic {
+    position: relative;
+    width: 250px;
+    left: 71px;
+}
+.contentAbout {
+    color: #eaba62;
+}
+.titlePosition {
+    position: absolute;
+    right: 0px;
+    background: #1a202c;
+    top: 328px! important;
+    width: 250px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+.logo h1 {
+    font-weight: bold;
+}
+.contentAbout p, .contentAbout span {
+    color: gray;
+}
+.datkTitle {
+    color: #eaba62;
+}
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.clockSize {
+    color: wheat;
+    font-size: 60px;
+    font-weight: bold;
+    top: 20px;
+}
+.icons-container i{
+    font-size: 30px;
+}
+.icons-container {
+    margin-left: 40px;
+    bottom: 100px;
+}
+.icons-container div{
+    margin-top: 35px;
+    margin-left: 15px;
+    text-align: center;
+}
+#searchCitiesBtn {
+    cursor: pointer;
+}
+.search {
+    color: gray;
+}
+.align {
+    text-align: center;
+}
+.deg-container {
+    bottom: 50px;
+    left: 180px;
+}
+.deg-container span {
+    position: relative;
+    bottom: 25px;
+    font-size: 110px;
+    font-weight: bold;
+}
+.deg-container p {
+    position: relative;
+    bottom: 45px;
+    left: 118px;
+}
+.btnContainer {
+    padding: 0px! important;
+    background: #eaba62;
+    border: 2px solid white!important;
+    border-radius: 20px!important;
+    text-align: center;
+}
+#fideDaysContainer p{
+    text-align: center;
+    color: gray! important;
+}
+.btnFrom5days {
+    background: #eaba62;
+    color: white;
+    padding: 10px 0px;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 20px!important;
+    cursor: pointer;
+    transition: 0.8s;
+}
+.btnFrom5days:hover {
+    background: #eea411;
+}
+#current-wish {
+    font-size: 53px;
+    top: 304px;
+}
+.emptyAbove {
+    margin-top: 118px;
+    border-right: 2px solid lightgray;
+}
+.fiveImgs {
+    width: 150px;
+}
+.fiveDaysDates {
+    font-size: 18px! important;
+    font-weight: bold;
+    padding-top: 10px;
+}
+.daysDescription {
+    text-transform: uppercase;
+    height: 15px;
+}
+.cityFromTable {
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    height: 80px;
+    bottom: 62px;
+}

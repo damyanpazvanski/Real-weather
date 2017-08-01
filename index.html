@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Real Weather</title>
+    <script src="jsLibraries/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="images/01d.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="css/pern.css">
+    <link rel="stylesheet" href="css/newCore.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/loader.css">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDsyG_pHBTHDvUhj6NtITb47o0NSbpFS0&libraries=places"></script>
+</head>
+<body>
+<div class="menu-wrap">
+    <div class="menu">
+        <ul>
+            <li><a href="index.html" class="active">home</a></li>
+            <li><a href="about.html">about</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div>
+            <ul class="search">
+                <li>
+                    <input id="searchCities" type="text" class="textfiled">
+                    <div id="citiesContainer"></div>
+                </li>
+                <li id="searchCitiesBtn">
+                    <img src="images/search-icon.jpg" alt="search">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--------menu wrap ends--------->
+<div id="loaderContainer" class="loaderContainer">
+    <div class="loader"></div>
+</div>
+
+<div class="clearing"></div>
+<div class="header">
+    <div class="logo">
+        <h1>real <span> weather</span> portal</h1>
+    </div>
+    <div class="social">
+        <ul>
+            <li><a href="http://www.facebook.com/damyan.pazvanski"><img src="images/facebook.png" alt="facebook"/></a></li>
+            <li><a href="https://www.tumblr.com/blog/damian1599"><img src="images/twwtter.png" alt="temblr"/></a></li>
+            <li><a href="https://www.linkedin.com/in/damyan-pazvanski-aa9bb312b"><img src="images/linkedin.png" alt="linkedin'"/></a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="page-container">
+    <!--------header wrap ends--------->
+    <div id="current-weather" class="banner">
+        <div id="current-weather-info" class="col-lg-12 col-md-12">
+            <div class="col-lg-12 col-md-12">
+                <div id="current-date" class="col-lg-5 clockSize"></div>
+                <div class="col-lg-2 col-md-2">
+                    <img class="img-container " id="current-img" alt="whether">
+                </div>
+
+                <div id="current-clock" class="col-lg-5 col-md-5 clockSize"></div>
+                <div class="col-lg-12 deg-container">
+                    <span id="current-degrees"></span>
+                    <span>&#8451;</span>
+                    <p>Current degrees</p>
+                </div>
+
+                <div class="icons-container col-lg-12">
+                    <div class="wind first bx-child" style="width: 75px; float: left; list-style: none;">
+                        <i class="icon icon-wind-nw"></i>
+                        <p class="metric">Wind</p>
+                        <span id="setCurrentWind"></span>
+                    </div>
+
+                    <div class="humidity bx-child" style="width: 75px; float: left; list-style: none;">
+                        <i class="icon icon-humidity-high"></i>
+                        <p class="metric">Humidity</p>
+                        <span id="setCurrentHumidity"></span>
+                    </div>
+
+                    <div class="sunrise bx-child" style="width: 75px; float: left; list-style: none;">
+                        <i class="icon-sunrise"></i>
+                        <p class="metric">Sunrise</p>
+                        <span id="setCurrentSunrise"></span>
+                    </div>
+
+                    <div class="sunset bx-child" style="width: 75px; float: left; list-style: none;">
+                        <i class="icon-sunset"></i>
+                        <p class="metric">Sunset</p>
+                        <span id="setCurrentSunset"></span>
+                    </div>
+                    <div class="pressure bx-child" style="width: 75px; float: left; list-style: none;">
+                        <i class="icon icon-pressure-medium-high"></i>
+                        <i class="icon-3"></i>
+                        <p class="metric">Pressure</p>
+                        <span class="icon-pressure_tend-3" id="setCurrentPressure"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h1 id="current-city"></h1>
+        <h2 id="current-sense"></h2>
+        <h2 id="current-wish"></h2>
+    </div>
+    <div class="panel" style="width: 60%; margin: 0 auto"></div>
+    <!--------banner end-------->
+    <div class="page">
+                <div class="panel btnContainer col-lg-12">
+                    <div id="showCastFiveDays" class="title datkTitle col-lg-12 btnFrom5days">Forecast for 5 days. Click here!</div>
+                    <div id="fideDaysContainer">
+
+                    </div>
+                </div>
+
+    </div>
+    <!---page-end--->
+
+</div>
+
+    <!--background-->
+    <!--<div class="footer-wrap">-->
+
+
+        <div class="footer">
+            <div class="page col-lg-12">
+                <div class="panel mar-right30 col-lg-6">
+                    <div class="title">
+                        <h1>"SPA" is amazing</h1>
+                    </div>
+                    <div class="content">
+                        <P>We wanted to make SPA(single page application)
+                        for you and your friends. We hope this will be helpfull for you,
+                        because everything load soo realy fast.</P>
+                        <div class="button"><a href="about.html">MORE INFO</a></div>
+                    </div>
+                </div>
+
+                <div class="panel mar-right30 col-lg-6">
+                    <div class="title">
+                        <h1>What we are! We:</h1>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li><a href="javascript:void(0)">are faster than others!</a></li>
+                            <li><a href="javascript:void(0)">are simple than others!</a></li>
+                            <li><a href="javascript:void(0)">don't have ads!</a></li>
+                            <li class="-no-border-bottom"><a href="javascript:void(0)">think about our clients!</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="content align col-lg-12">
+            <P>Copyright (c) realWeather. All rights reserved.</P>
+        </div>
+
+<!--primary-footer-end--->
+<script>
+    var apiKey = '06cc5aa75e01a73850fb701060d55309';
+    (function () {
+        $.ajax({
+            type: 'GET',
+            url: 'http://ip-api.com/json',
+            dataType: 'json',
+            success: function (location) {
+                var lat = location.lat,
+                        lon = location.lon;
+
+                getInfoForCurrentCity(lat, lon);
+
+            },
+            error: function (err) {
+				console.log(err);
+            }
+        });
+
+        function getInfoForCurrentCity(lat, lon) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&appid=' + apiKey,
+                dataType: 'json',
+                success: function (data) {
+                    var temp = data.main.temp.toFixed(1),
+                            cityId = data.id,
+                            humidity = data.main.humidity,
+                            pressure = data.main.pressure,
+                            country = data.sys.country,
+                            sunrise = data.sys.sunrise,
+                            sunset = data.sys.sunset,
+                            weatherDescription = data.weather[0].description,
+                            icon = data.weather[0].icon,
+                            windSpeed = data.wind.speed,
+                            date = '"' + new Date() + '"',
+                            time = new Date(data.dt * 1000);
+
+                    //where are city\country fields
+                    $('#current-city').text(data.name + '  (' + country + ')');
+                    $('#current-city').attr('data-id', cityId);
+                    $('#current-sense').text(weatherDescription);
+
+                    $('#current-degrees').text(temp);
+                    $('#current-date').text(date.slice(5, 16));
+                    $('#current-img').attr('src', '/images/' + icon + '.png');
+                    $('#setCurrentWind').text(windSpeed + ' km/h');
+                    $('#setCurrentHumidity').text(humidity + ' %');
+                    $('#setCurrentPressure').text(pressure + ' hPa');
+
+                    var sunriseDate = new Date(sunrise * 1000);
+                    $('#setCurrentSunrise').text(sunriseDate.getHours() + ':' + ("0" + sunriseDate.getMinutes()).substr(-2) + ' AM');
+
+                    var sunsetDate = new Date(sunset * 1000);
+                    $('#setCurrentSunset').text(sunsetDate.getHours() + ':' + ("0" + sunsetDate.getMinutes()).substr(-2) +' PM');
+
+                    if (time.getHours() >= 19 || time.getHours() <= 6) {
+                        $(document.body).css({
+                            'background': 'url("images/back-n.jpg"), no-repeat',
+                            'background-size': 'cover'
+                        });
+                        $('#current-wish').text('Good night!');
+                    } else if (time.getHours() >= 13 && time.getHours() <= 18) {
+                        $(document.body).css({
+                            'background': 'url("images/wa1.jpg"), no-repeat',
+                            'background-size': 'cover'
+                        });
+                        $('#current-wish').text('Good afternoon!');
+                    } else {
+                        $(document.body).css({
+                            'background': 'url("images/wa1.jpg"), no-repeat',
+                            'background-size': 'cover'
+                        });
+                        $('#current-wish').text('Good morning!');
+                    }
+                    var clock = $('#current-clock');
+                    setInterval(function () {
+                        clock.text('');
+                        var date = new Date(),
+                                h = date.getHours(),
+                                m = date.getMinutes(),
+                                s = date.getSeconds();
+                        clock.text(("0" + h).substr(-2) + ':' + ("0" + m).substr(-2) + ':' + ("0" + s).substr(-2) + "(" + country + ')' );
+                    }, 1000);
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+    }());
+
+    (function () {
+
+        var defaultBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(-33.8902, 151.1759),
+                new google.maps.LatLng(-33.8474, 151.2631));
+
+        var input = document.getElementById('searchCities');
+        var options = {
+            bounds: defaultBounds,
+            types: ['(cities)']
+        };
+
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
+        function searchByCity() {
+            var cityAndCountry = input.value;
+            if (cityAndCountry.length > 3) {
+                var city = cityAndCountry.split(',')[0];
+                city = city.trim();
+                $('#loaderContainer').fadeIn('fast');
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=' + apiKey,
+                    dataType: 'json',
+                    success: function (data) {
+                        var temp = data.main.temp.toFixed(1),
+                                cityId = data.id,
+                                humidity = data.main.humidity,
+                                pressure = data.main.pressure,
+                                country = data.sys.country,
+                                sunrise = data.sys.sunrise,
+                                sunset = data.sys.sunset,
+                                weatherDescription = data.weather[0].description,
+                                icon = data.weather[0].icon,
+                                windSpeed = data.wind.speed,
+                                date = '"' + new Date() + '"',
+                                time = new Date(data.dt * 1000);
+
+                        //where are city\country fields
+                        $('#current-city').text(data.name + '  (' + country + ')');
+                        $('#current-city').attr('data-id', cityId);
+                        $('#current-sense').text(weatherDescription);
+
+                        $('#current-degrees').text(temp);
+                        $('#current-date').text(date.slice(5, 16));
+                        $('#current-img').attr('src', '/images/' + icon + '.png');
+                        $('#setCurrentWind').text(windSpeed + ' km/h');
+                        $('#setCurrentHumidity').text(humidity + ' %');
+                        $('#setCurrentPressure').text(pressure + ' hPa');
+
+                        var sunriseDate = new Date(sunrise * 1000);
+                        $('#setCurrentSunrise').text(sunriseDate.getHours() + ':' + ("0" + sunriseDate.getMinutes()).substr(-2) + ' AM');
+
+                        var sunsetDate = new Date(sunset * 1000);
+                        $('#setCurrentSunset').text(sunsetDate.getHours() + ':' + ("0" + sunsetDate.getMinutes()).substr(-2) +' PM');
+
+                        if (time.getHours() >= 19 || time.getHours() <= 6) {
+                            $(document.body).css({
+                                'background': 'url("images/back-n.jpg"), no-repeat',
+                                'background-size': 'cover'
+                            });
+                            $('#current-wish').text('Good night!');
+                        } else if (time.getHours() >= 13 && time.getHours() <= 18) {
+                            $(document.body).css({
+                                'background': 'url("images/wa1.jpg"), no-repeat',
+                                'background-size': 'cover'
+                            });
+                            $('#current-wish').text('Good afternoon!');
+                        } else {
+                            $(document.body).css({
+                                'background': 'url("images/wa1.jpg"), no-repeat',
+                                'background-size': 'cover'
+                            });
+                            $('#current-wish').text('Good morning!');
+                        }
+
+
+                        $('#searchCities').val('');
+                    },
+                    error: function () {
+
+                    }
+                }).done(function () {
+                    $('#loaderContainer').fadeOut('slow');
+                });
+                $('#fideDaysContainer').children().fadeOut();
+            } else {
+
+            }
+        }
+
+        $('#searchCities').keydown(function(event) {
+            if (event.keyCode == 13) {
+                searchByCity();
+            }
+        });
+
+        $('#searchCitiesBtn').on('click', function () {
+            searchByCity();
+        });
+
+
+
+        $('#showCastFiveDays').on('click', function () {
+            var id = $('#current-city').attr('data-id');
+            var cityId = $('#getCityId').attr('data-id');
+
+            if (cityId == id) {
+                $('#fideDaysContainer').children().toggle('slow');
+            } else {
+                $('#loaderContainer').fadeIn('fast');
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://api.openweathermap.org/data/2.5/forecast?id=' + id + '&mode=json&units=metric&appid=' + apiKey,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        var time = data.list[2].dt_txt.slice(11, 16);
+
+                        $('#fideDaysContainer').html('');
+                        $('#fideDaysContainer').append('<div class="emptyAbove col-lg-2">' +
+                                '<p id="getCityId" class="cityFromTable" data-id="' + id + '">' + data.city.name + '<br/><br/>' + time + ' h.</p>' +
+                                '<p>temperature: </p>' +
+                                '<p>Sea level: </p>' +
+                                '<p>Wind: </p>' +
+                                '<p>Rain: </p>' +
+                                '<p>Humidity: </p>' +
+                                '<p>Pressure: </p></div>');
+
+                        for (var i = 2; data.list.length; i += 8) {
+                            var temp = (data.list[i].main.temp).toFixed(1),
+                                    humidity = data.list[i].main.humidity,
+                                    pressure = data.list[i].main.pressure,
+                                    seaLevel = data.list[i].main.sea_level,
+                                    weatherDescription = data.list[i].weather[0].description,
+                                    icon = data.list[i].weather[0].icon,
+                                    weatherMain = data.list[i].weather[0].main,
+                                    windSpeed = data.list[i].wind.speed,
+                                    date = data.list[i].dt_txt.slice(0, 10),
+                                    rain;
+
+                            if (data.list[i].rain) {
+                                if (data.list[i].rain['3h']) {
+                                    rain = data.list[i].rain['3h'];
+                                } else {
+                                    rain = '< 0.1';
+                                }
+                            } else {
+                                rain = '< 0.1';
+                            }
+
+                            $('#fideDaysContainer').append('<div class="col-lg-2">' +
+                                    '<p class="fiveDaysDates title">' + date + '</p>' +
+                                    '<p class="daysDescription">' + weatherDescription + '</p>' +
+                                    '<img class="fiveImgs" src="/images/black-icons/' + icon + '.png" alt="weather">' +
+                                    '<p>' + temp + '&#8451;</p>' +
+                                    '<p>' + seaLevel + '</p>' +
+                                    '<p>' + windSpeed + ' km/h</p>' +
+                                    '<p>' + rain + ' mm</p>' +
+                                    '<p>' + humidity + ' %</p>' +
+                                    '<p>' + pressure + ' hPa</p></div>');
+
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+                $('#loaderContainer').fadeOut('slow');
+            }
+        });
+
+    }());
+</script>
+
+</body>
+</html>
